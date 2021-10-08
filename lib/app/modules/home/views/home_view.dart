@@ -32,14 +32,16 @@ class HomeView extends GetView<HomeController> {
                     provId: controller.provIdAsal.value,
                   ),
           ),
-          Obx(() => controller.hiddenProvTujuan.isTrue
-              ? SizedBox()
-              : Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Divider(
-                    color: Colors.black,
+          Obx(
+            () => controller.hiddenProvTujuan.isTrue
+                ? SizedBox()
+                : Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Divider(
+                      color: Colors.black,
+                    ),
                   ),
-                )),
+          ),
           Obx(
             () => controller.hiddenProvTujuan.isTrue
                 ? SizedBox()
@@ -67,54 +69,59 @@ class HomeView extends GetView<HomeController> {
           SizedBox(
             height: 30,
           ),
-          Obx(() => controller.hiddenKurir.isTrue
-              ? SizedBox()
-              : DropdownSearch<Map<String, dynamic>>(
-                  mode: Mode.MENU,
-                  label: "Tipe Kurir",
-                  hint: "Tipe Kurir",
-                  // showSelectedItem: true,
-                  showClearButton: true,
-                  items: [
-                    {
-                      "code": "jne",
-                      "name": "Jalur Nugraha Ekakurir (JNE)",
+          Obx(
+            () => controller.hiddenKurir.isTrue
+                ? SizedBox()
+                : DropdownSearch<Map<String, dynamic>>(
+                    mode: Mode.MENU,
+                    label: "Tipe Kurir",
+                    hint: "Tipe Kurir",
+                    // showSelectedItem: true,
+                    showClearButton: true,
+                    items: [
+                      {
+                        "code": "jne",
+                        "name": "Jalur Nugraha Ekakurir (JNE)",
+                      },
+                      {
+                        "code": "tiki",
+                        "name": "Titipan Kilat (TIKI)",
+                      },
+                      {
+                        "code": "pos",
+                        "name": "POS Indonesia",
+                      },
+                    ],
+                    itemAsString: (item) {
+                      return "${item['name']}";
                     },
-                    {
-                      "code": "tiki",
-                      "name": "Titipan Kilat (TIKI)",
-                    },
-                    {
-                      "code": "pos",
-                      "name": "POS Indonesia",
-                    },
-                  ],
-                  itemAsString: (item) {
-                    return "${item['name']}";
-                  },
-                  popupItemBuilder: (context, item, isSelected) {
-                    return Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      child: Text(
-                        "${item['name']}",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
+                    popupItemBuilder: (context, item, isSelected) {
+                      return Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                        child: Text(
+                          "${item['name']}",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  onChanged: (value) {
-                    if (value != null) {
-                      if (controller.kotaIdAsal != 0 && controller.kotaIdTujuan != 0 && controller.berat > 0) {
-                        controller.hiddenButton.value = false;
-                        controller.idKurir.value = '${value['code']}';
+                      );
+                    },
+                    onChanged: (value) {
+                      if (value != null) {
+                        if (controller.kotaIdAsal != 0 &&
+                            controller.kotaIdTujuan != 0 &&
+                            controller.berat > 0) {
+                          controller.hiddenButton.value = false;
+                          controller.idKurir.value = '${value['code']}';
+                        }
+                      } else {
+                        controller.hiddenButton.value = true;
                       }
-                    } else {
-                      controller.hiddenButton.value = true;
-                    }
-                  },
-                )),
+                    },
+                  ),
+          ),
           SizedBox(
             height: 15,
           ),
