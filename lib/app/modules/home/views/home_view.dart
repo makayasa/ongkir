@@ -12,7 +12,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HomeView'),
+        title: Text('Test Changed From Mac'),
         centerTitle: true,
       ),
       body: ListView(
